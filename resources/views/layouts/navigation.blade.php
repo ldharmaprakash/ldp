@@ -8,7 +8,7 @@
             <img src="{{ asset('images/logo.png') }}" alt="AdminLTE Logo" class="brand-image opacity-75 shadow">
             <!--end::Brand Image-->
             <!--begin::Brand Text-->
-            <span class="brand-text fw-light"> Admin Template</span>
+            <span class="brand-text fw-light">Exam Center</span>
             <!--end::Brand Text-->
         </a>
         <!--end::Brand Link-->
