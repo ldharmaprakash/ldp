@@ -5,7 +5,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-sm-6">
-					<h3 class="mb-0"> Students </h3>
+					<h3 class="mb-0"> Teachers </h3>
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-end">
@@ -13,7 +13,7 @@
 							<a href="{{ route('dashboard') }}"> Dashboard </a>
 						</li>
 						<li class="breadcrumb-item active" aria-current="page">
-							Students
+							Teachers
 						</li>
 					</ol>
 				</div>
@@ -27,14 +27,14 @@
 					<div class="card">
 						<div class="card-header">
 							<div class="d-flex align-items-center">
-								<h3 class="card-title"> Students List </h3>
-								<a href="{{ route('students.create') }}" class="btn btn-primary btn-round ms-auto">
-									Add Student
+								<h3 class="card-title"> Teachers List </h3>
+								<a href="{{ route('teachers.create') }}" class="btn btn-primary btn-round ms-auto">
+									Add Teacher
 								</a>
 							</div>
 						</div>
 						<div class="card-body transition-none">
-							{!! $dataTable->table(['id' => 'studentsTable', 'class' => 'table table-bordered table-striped'], true) !!}
+							{!! $dataTable->table(['id' => 'teachersTable', 'class' => 'table table-bordered table-striped'], true) !!}
 						</div>
 					</div>
 				</div>
@@ -52,7 +52,7 @@
 {!! $dataTable->scripts() !!}
 <script>
     $(document).ready(function() {
-        $('#studentsTable').DataTable(); // Ensure DataTable initialization
+        $('#teachersTable').DataTable(); // Ensure DataTable initialization
     });
 </script>
 @endpush

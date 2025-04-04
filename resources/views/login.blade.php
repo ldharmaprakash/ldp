@@ -85,11 +85,12 @@
 		        let passwordElem = parentElement.querySelector('.password');
 		        let type = passwordElem.getAttribute('type') === 'password' ? 'text' : 'password';
 		        passwordElem.setAttribute('type', type);
-		        this.classList.toggle('icon-eye-slash');
+		        event.target.classList.toggle('fa-eye');
+		        event.target.classList.toggle('fa-eye-slash'); // Fix toggle icon class
 		    };
 		    
 		    document.querySelectorAll('.toggle-password').forEach(item => {
-		        item.addEventListener(event, togglePasswordField);
+		        item.addEventListener('click', togglePasswordField); // Fix event type to 'click'
 		    });
 			
 			$(document).ready(function() {

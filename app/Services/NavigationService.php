@@ -74,6 +74,16 @@ class NavigationService
             ];
         }
 
+        if ($user->hasRole('admin') || $user->can('read-exams')) {
+            $menus[] = [
+                'link' => route('exams'),
+                'text' => "Exams",
+                'icon' => 'bi bi-calendar-event',
+                'is_active' => $active_menu == 'exams',
+                'has_submenu' => false,
+                'sub_menu' => [],
+            ];
+        }
 
         $sub_menu = [
             [

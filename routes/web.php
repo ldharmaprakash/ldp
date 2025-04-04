@@ -9,6 +9,7 @@ use App\Http\Controllers\{ HomeController,
     StudentController,
     TeacherController,
     ExamSeatingController,
+    ExamController,
 };
 
 /*
@@ -141,6 +142,22 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'exams', 'middleware' => 'auth'], function () {
         Route::get('create', [ExamController::class, 'create'])->name('exams.create');
         Route::post('store', [ExamController::class, 'store'])->name('exams.store');
+    });
+
+    // Exam Routes
+    Route::group(['prefix' => 'exams', 'middleware' => 'auth'], function () {
+        Route::get('/', [ExamController::class, 'index'])->name('exams')
+            ->middleware('role:admin|permission:read-exams');
+        Route::get('create', [ExamController::class, 'create'])->name('exams.create')
+            ->middleware('role:admin|permission:create-exams');
+        Route::post('/', [ExamController::class, 'store'])->name('exams.store')
+            ->middleware('role:admin|permission:create-exams');
+        Route::get('{id}/edit', [ExamController::class, 'edit'])->name('exams.edit')
+            ->middleware('role:admin|permission:update-exams');
+        Route::match(['PUT', 'PATCH'], '{id}', [ExamController::class, 'update'])->name('exams.update')
+            ->middleware('role:admin|permission:update-exams');
+        Route::delete('{id}', [ExamController::class, 'destroy'])->name('exams.delete')
+            ->middleware('role:admin|permission:delete-exams');
     });
 
 });
