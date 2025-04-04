@@ -1,0 +1,35 @@
+.input-file {
+  input[type="file"], .form-control, .form-control-file{
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+  label{
+    &.error, &.success{
+      display: block;
+    }
+  }
+  input[type="file"] + label:not(.error), .form-control + label:not(.error), .form-control-file + label:not(.error),  .label-input-file {
+    font-weight: $font-weight-bold;
+    letter-spacing: 0.02em;
+    background: $dark;
+    color: $white !important;
+    display: inline-block;
+  }
+
+  &.input-file-image{
+    img.img-upload-preview{
+      width: 150px;
+      max-width: 100%;
+      display: block;
+      margin-bottom: 15px;
+      box-shadow: 0 1px 15px 1px rgba(39,39,39,.1);
+      &.img-circle{
+        border-radius: 2000px;
+      }
+    }
+  }
+}
