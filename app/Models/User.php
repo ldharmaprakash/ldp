@@ -65,4 +65,5 @@ class User extends Authenticatable
         $role = $this->roles()->first();
         return optional($role)->display_name ?? '';
     }
+    
 }
