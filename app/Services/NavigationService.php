@@ -67,7 +67,7 @@ class NavigationService
             $menus[] = [
                 'link' => route('teacher'),
                 'text' => "Teacher",
-                'icon' => 'bi bi-people',
+                'icon' => 'fas fa-user',
                 'is_active' => $active_menu == 'teacher',
                 'has_submenu' => false,
                 'sub_menu' => [],
@@ -103,14 +103,14 @@ class NavigationService
             ],
         ];
 
-        $menus[] = [
-            'link' => 'WidgetUserDropdown',
-            'text' => "Widgets",
-            'icon' => 'bi bi-box-seam-fill',
-            'is_active' => in_array($active_menu,['small_box', 'info_box','card']),
-            'has_submenu' => true,
-            'sub_menu' => $sub_menu,
-        ];
+        // $menus[] = [
+        //     'link' => 'WidgetUserDropdown',
+        //     'text' => "Widgets",
+        //     'icon' => 'bi bi-box-seam-fill',
+        //     'is_active' => in_array($active_menu,['small_box', 'info_box','card']),
+        //     'has_submenu' => true,
+        //     'sub_menu' => $sub_menu,
+        // ];
 
         return $menus;
     }

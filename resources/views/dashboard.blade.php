@@ -20,9 +20,15 @@
         </div>
                 
         <!-- College Name & Logo -->
+<<<<<<< HEAD
         <div class="d-flex align-items-center justify-content-center my-3">
             <img src="{{ asset('images/logo.jpg') }}" alt="College Logo" class="img-fluid me-3" style="max-height: 80px;">
             <h2 class="mt-2">Pope John Paul II College of Education</h2>
+=======
+        <div class="d-flex align-items-center justify-content-center  " style="width: 100%;">
+            <img src="{{ asset('images/clglogo.png') }}" alt="College Logo" class="img-fluid me-3" style="max-height: 80px; width : 90%;">
+           
+>>>>>>> c0d52e7af56d7187ea73ccc23340d0f6f9b4e738
         </div>
         
         <!-- Image Swipe (Carousel) -->

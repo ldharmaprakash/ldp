@@ -38,7 +38,17 @@ class UsersDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->select();
+        $query = $model->newQuery();
+
+        if ($search = request()->get('search')['value'] ?? null) {
+            $query->where(function ($q) use ($search) {
+                $q->where('id', 'like', "%{$search}%")
+                  ->orWhere('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%");
+            });
+        }
+
+        return $query->select();
     }
 
     /**

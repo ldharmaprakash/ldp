@@ -204,9 +204,9 @@
                         <!--end::To the end-->
                         <!--begin::Copyright-->
                         <strong>
-                            Copyright &copy; 2023
+                            Copyright &copy; 2025
                         </strong>
-                        All rights reserved.
+                        LDP - L DharmaPrakash
                         <!--end::Copyright-->
                     </footer>
                     <!--end::Footer-->
