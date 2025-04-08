@@ -23,6 +23,7 @@
         <div class="d-flex align-items-center justify-content-center  " style="width: 100%;">
             <img src="{{ asset('images/clglogo.png') }}" alt="College Logo" class="img-fluid me-3" style="max-height: 80px; width : 90%;">
            
+>>>>>>> c0d52e7af56d7187ea73ccc23340d0f6f9b4e738
         </div>
         
         <!-- Image Swipe (Carousel) -->
