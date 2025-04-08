@@ -19,6 +19,11 @@
         <!-- Include App Style Sheet -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css" integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0=" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
+        <style>
+            body{
+                font-family: 'Source Sans Pro', sans-serif !important;
+            }
+        </style>
     </head>
     <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
         <div id="app" class="app-wrapper" v-cloak>

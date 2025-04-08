@@ -1,51 +1,29 @@
+<?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ExamSeating;
 
 class ExamSeatingController extends Controller
 {
     public function index()
     {
-        $examSeatings = ExamSeating::all();
-        return view('exam-seating.index', compact('examSeatings'));
-    }
-
-    public function create()
-    {
-        return view('exam-seating.create');
+        return view('exam-seating.index');
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'exam_name' => 'required|string|max:255',
-            'seating_arrangement' => 'required|string',
+        // Handle form submission logic here
+        $validated = $request->validate([
+            'department' => 'required|string',
+            'year' => 'required|integer',
+            'regno_start' => 'required|integer',
+            'regno_end' => 'required|integer',
         ]);
 
-        ExamSeating::create($request->all());
-        return redirect()->route('exam-seating.index')->with('success', 'Exam and Seating created successfully.');
-    }
+        // Save or process the data
+        // ...
 
-    public function edit(ExamSeating $examSeating)
-    {
-        return view('exam-seating.edit', compact('examSeating'));
-    }
-
-    public function update(Request $request, ExamSeating $examSeating)
-    {
-        $request->validate([
-            'exam_name' => 'required|string|max:255',
-            'seating_arrangement' => 'required|string',
-        ]);
-
-        $examSeating->update($request->all());
-        return redirect()->route('exam-seating.index')->with('success', 'Exam and Seating updated successfully.');
-    }
-
-    public function destroy(ExamSeating $examSeating)
-    {
-        $examSeating->delete();
-        return redirect()->route('exam-seating.index')->with('success', 'Exam and Seating deleted successfully.');
+        return redirect()->route('exam-seating.index')->with('success', 'Exam seating created successfully.');
     }
 }

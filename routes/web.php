@@ -160,6 +160,12 @@ Route::group(['middleware' => 'auth'], function () {
             ->middleware('role:admin|permission:delete-exams');
     });
 
+    // Exam Seating Routes
+    Route::middleware(['auth', 'role:admin'])->group(function () {
+        Route::get('/exam-seating', [ExamSeatingController::class, 'index'])->name('exam-seating.index');
+        Route::post('/exam-seating', [ExamSeatingController::class, 'store'])->name('exam-seating.store');
+    });
+
 });
 // Admin access to student pages
 Route::middleware(['auth', 'role:admin'])->group(function () {

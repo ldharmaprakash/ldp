@@ -10,6 +10,8 @@
             <div class="card-body">
                 <form action="{{ route('students.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                   <div class="row g-3">
+                    <div class="col-md-6">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
@@ -31,6 +33,8 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
+                    </div>
+                    <div class="col-md-6">
                     <div class="mb-3">
                         <label for="year" class="form-label">Year</label>
                         <input type="number" name="year" class="form-control" value="{{ old('year') }}" required>
@@ -55,7 +59,9 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="mb-3">
+                    </div>
+                     <div class="col-md-6">
+                     <div class="mb-3">
                         <label for="dob" class="form-label">Date of Birth</label>
                         <input type="date" name="dob" class="form-control" value="{{ old('dob') }}" required>
                         @error('dob')
@@ -76,32 +82,42 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="mb-3">
-                        <label for="register_number" class="form-label">Register Number</label>
-                        <input type="text" name="register_number" class="form-control" value="{{ old('register_number') }}" required>
-                        @error('register_number')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control" value="{{ old('email') }}" required>
-                        @error('email')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <button type="submit" class="btn btn-primary">Add Student</button>
+                     </div>
+                       <div class="col-md-6">
+                           <div class="mb-3">
+                            <label for="register_number" class="form-label">Register Number</label>
+                            <input type="text" name="register_number" class="form-control" value="{{ old('register_number') }}" required>
+                            @error('register_number')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" value="{{ old('email') }}" required>
+                            @error('email')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="justify-content-end d-flex mt-5">
+                         <button type="submit" class="btn btn-primary">Add Student</button>
+                       </div>
+                       </div>
                 </form>
+                <hr class="mx-auto my-4" style="width: 90%; height: 2px; border: none; background: #ccc; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);">
                 <form action="{{ route('students.import') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="mb-3">
-                        <label for="import_file" class="form-label">Import Students (Excel/CSV)</label>
-                        <input type="file" name="import_file" class="form-control" id="import_file" accept=".csv, .xlsx" required>
-                        @error('import_file')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
+                    <div class="d-flex justify-content-center align-items-center gap-3 mb-3">
+                        <div style="max-width: 300px;">
+                            <label for="import_file" class="form-label text-center">Import Students (Excel/CSV)</label>
+                            <input type="file" name="import_file" class="form-control" id="import_file" accept=".csv, .xlsx" required>
+                            @error('import_file')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mt-4"style="max-width: 300px;">
+                            <button type="submit" class="btn btn-secondary w-100">Import Students</button>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-secondary">Import Students</button>
                 </form>
             </div>
         </div>
