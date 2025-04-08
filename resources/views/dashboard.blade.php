@@ -89,7 +89,7 @@
                 <div class="col-md-8">
                     <iframe 
                         src="https://www.google.com/maps/embed?..."
-                        width="100%" height="200" style="border:0;" allowfullscreen>
+                        width="120%" height="200" style="border:0;" allowfullscreen>
                     </iframe>
                 </div>
             </div>

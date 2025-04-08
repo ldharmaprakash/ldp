@@ -28,7 +28,7 @@
 						<div class="card-header">
 							<div class="d-flex align-items-center">
 								<h3 class="card-title"> Teachers List </h3>
-								<a href="{{ route('teachers.create') }}" class="btn btn-primary btn-round ms-auto">
+								<a href="{{ route('teachers.create') }}" class="btn btn-primary btn-round ms-auto ">
 									Add Teacher
 								</a>
 							</div>
