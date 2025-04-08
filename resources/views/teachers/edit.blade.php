@@ -79,7 +79,10 @@
                             @enderror
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3">Update Teacher</button>
+                    <div class="d-flex justify-content-end">
+                         <a class="btn btn-primary mt-3 me-2" href="{{ route('teachers') }}">Back</a>
+                        <button type="submit" class="btn btn-primary mt-3">Update Teacher</button>
+                    </div>
                 </form>
             </div>
         </div>

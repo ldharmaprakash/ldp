@@ -11,6 +11,8 @@
                 <form action="{{ route('students.update', $student->id) }}" method="POST">
                     @csrf
                     @method('PATCH')
+                    <div class="row g-3">
+                    <div class="col-md-6">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" name="name" class="form-control" value="{{ old('name', $student->name) }}" required>
@@ -32,6 +34,8 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
+                    </div>
+                    <div class="col-md-6">
                     <div class="mb-3">
                         <label for="year" class="form-label">Year</label>
                         <input type="number" name="year" class="form-control" value="{{ old('year', $student->year) }}" required>
@@ -56,6 +60,8 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
+                    </div>
+                    <div class="col-md-6">
                     <div class="mb-3">
                         <label for="dob" class="form-label">Date of Birth</label>
                         <input type="date" name="dob" class="form-control" value="{{ old('dob', $student->dob) }}" required>
@@ -77,6 +83,8 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
+                    </div>
+                    <div class="col-md-6">
                     <div class="mb-3">
                         <label for="register_number" class="form-label">Register Number</label>
                         <input type="text" name="register_number" class="form-control" value="{{ old('register_number', $student->register_number) }}" required>
@@ -91,7 +99,12 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <button type="submit" class="btn btn-primary">Update Student</button>
+                  </div>
+                   <div class="justify-content-end d-flex">
+                     <a class="btn btn-primary mt-3 me-2" href="{{ route('students') }}">Back</a>
+                     <button type="submit" class="btn btn-primary mt-3 me-2">Update Student</button>
+                   </div>
+                    </div>
                 </form>
             </div>
         </div>

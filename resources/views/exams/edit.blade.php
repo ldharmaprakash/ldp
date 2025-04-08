@@ -43,7 +43,8 @@
                         
                     </div>
                     <div class="justify-content-end d-flex">
-                       <button type="submit" class="btn btn-primary">Update Exam</button>
+                        <a href="{{ route('exams') }}" class="btn btn-primary mt-3 me-2">Back</a>
+                       <button type="submit" class="btn btn-primary mt-3 me-2">Update Exam</button>
                     </div>
                           
                 </form>

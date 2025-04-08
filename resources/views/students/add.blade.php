@@ -99,7 +99,8 @@
                             @enderror
                         </div>
                         <div class="justify-content-end d-flex mt-5">
-                         <button type="submit" class="btn btn-primary">Add Student</button>
+                            <a href="{{ route('students') }}" class="btn btn-primary me-2 mt-3">Back</a>
+                         <button type="submit" class="btn btn-primary  me-2 mt-3">Add Student</button>
                        </div>
                        </div>
                 </form>

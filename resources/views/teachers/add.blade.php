@@ -91,7 +91,10 @@
                             </div>
                         </div>
                     </div>
+                    <div class="d-flex justify-content-end">
+                    <a  class="btn btn-primary mt-3 me-2" href="{{ route('teachers') }}" style="color:white;">Back</a>
                     <button type="submit" class="btn btn-primary mt-3">Add Teacher</button>
+                    </div>
                 </form>
             </div>
         </div>
