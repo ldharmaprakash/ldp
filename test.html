@@ -1,0 +1,778 @@
+<html>
+<head>
+  <title>Toggle List</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+  <style>
+    .toggle-list {
+      display: none;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .list-item {
+      margin-bottom: 10px;
+    }
+
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 18px;
+      text-align: left;
+      background: linear-gradient(to right, #f8f9fa, #e9ecef);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .custom-table th {
+      background-color: #007bff;
+      color: white;
+      padding: 12px;
+    }
+
+    .custom-table td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .custom-table tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .custom-table tr:hover {
+      background-color: #d1ecf1;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="toggle-button">Toggle List</button>
+  <div class="toggle-list">
+    <ul class="list-item">
+      <li>Item 1</li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+    </ul>
+  </div>
+
+  <table class="custom-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Student ID</th>
+        <th>Department</th>
+        <th>Year</th>
+        <th>Batch</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>ST12345</td>
+        <td>Computer Science</td>
+        <td>3</td>
+        <td>A</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>ST67890</td>
+        <td>Mathematics</td>
+        <td>2</td>
+        <td>B</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Emily Johnson</td>
+        <td>ST11223</td>
+        <td>Physics</td>
+        <td>1</td>
+        <td>C</td>
+        <td>emily.johnson@example.com</td>
+      </tr>   
+
+    </tbody>
+  </table>
+
+  <script>
+    $(document).ready(function() {
+      $('.toggle-button').on('click', function() {
+        $('.toggle-list'). toggle();
+      });
+      $('.custom-table').DataTable({
+        paging: true,
+        searching: true,
+        ordering: true,
+        info: true,
+        lengthChange: true,
+        pageLength: 5,
+        language: {
+          search: "Filter records:",
+          lengthMenu: "Show _MENU_ entries",
+          info: "Showing _START_ to _END_ of _TOTAL_ entries",
+          paginate: {
+            first: "First",
+            last: "Last",
+            next: "Next",
+            previous: "Previous"
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

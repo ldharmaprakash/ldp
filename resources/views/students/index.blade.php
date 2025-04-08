@@ -9,7 +9,7 @@
                     <h3 class="mb-0">{{ $main_title }}</h3>
                 </div>
                 <div class="col-sm-6">
-                    @if(auth()->user()->hasRole('admin') || auth()->user()->can('create-students'))
+                    @if(auth()->user()->hasRole('admin') || auth()->user()->can('create-teachers'))
                         <a href="{{ route('students.create') }}" class="btn btn-primary float-end">
                             <i class="bi bi-plus-circle"></i> Add Student
                         </a>
@@ -27,7 +27,7 @@
                             <h3 class="card-title">{{ $sub_title }}</h3>
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered table-hover">
+                            <table class="table table-bordered table-hover" id="studentTable">
                                 <thead>
                                     <tr>
                                         <th>#</th>

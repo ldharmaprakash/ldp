@@ -40,27 +40,27 @@
                                         <i class="bi bi-list"></i>
                                     </a>
                                 </li>
-                                <li class="nav-item d-none d-md-block">
+                                {{-- <li class="nav-item d-none d-md-block">
                                     <a href="#" class="nav-link">Home</a>
                                 </li>
                                 <li class="nav-item d-none d-md-block">
                                     <a href="#" class="nav-link">Contact</a>
-                                </li>
+                                </li> --}}
                             </ul>
                             <!--end::Start Navbar Links-->
 
                             <!--begin::End Navbar Links-->
                             <ul class="navbar-nav ms-auto">
                                 <!--begin::Navbar Search-->
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                                         <i class="bi bi-search"></i>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <!--end::Navbar Search-->
 
                                 <!--begin::Messages Dropdown Menu-->
-                                <li class="nav-item dropdown">
+                                {{-- <li class="nav-item dropdown">
                                     <a class="nav-link" data-bs-toggle="dropdown" href="#">
                                         <i class="bi bi-chat-text"></i>
                                         <span class="navbar-badge badge text-bg-danger">3</span>
@@ -132,11 +132,11 @@
                                         <div class="dropdown-divider"></div>
                                         <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
                                     </div>
-                                </li>
+                                </li> --}}
                                 <!--end::Messages Dropdown Menu-->
 
                                 <!--begin::Notifications Dropdown Menu-->
-                                <li class="nav-item dropdown">
+                                {{-- <li class="nav-item dropdown">
                                     <a class="nav-link" data-bs-toggle="dropdown" href="#">
                                         <i class="bi bi-bell-fill"></i>
                                         <span class="navbar-badge badge text-bg-warning">15</span>
@@ -163,7 +163,7 @@
                                             See All Notifications
                                         </a>
                                     </div>
-                                </li>
+                                </li> --}}
                                 <!--end::Notifications Dropdown Menu-->
 
                                 <!--begin::User Menu Dropdown-->
