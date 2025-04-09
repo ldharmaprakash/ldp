@@ -78,6 +78,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('{id}/download', [StudentController::class, 'download'])->name('students.download')
             ->middleware('role:admin|permission:read-students');
         Route::post('/students/import', [StudentController::class, 'import'])->name('students.import');
+        Route::get('/students', [StudentController::class, 'getStudents'])->name('students.get');
+        Route::get('/students', [StudentController::class, 'getStudents'])->name('students.get');
     });
 
     // Teacher Routes

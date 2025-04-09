@@ -6,14 +6,15 @@ use Illuminate\Http\Request;
 
 class ExamSeatingController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('exam-seating.index');
+        $students = $request->get('students', []); // Default to an empty array if no students are passed
+        return view('exam-seating.index', compact('students'));
     }
 
     public function store(Request $request)
     {
-        // Handle form submission logic here
+        // Validate the form input
         $validated = $request->validate([
             'department' => 'required|string',
             'year' => 'required|integer',
@@ -21,9 +22,10 @@ class ExamSeatingController extends Controller
             'regno_end' => 'required|integer',
         ]);
 
-        // Save or process the data
-        // ...
+        // Fetch all students
+        $students = \App\Models\Student::all();
 
-        return redirect()->route('exam-seating.index')->with('success', 'Exam seating created successfully.');
+        // Redirect back to the index view with the student data
+        return redirect()->route('exam-seating.index', ['students' => $students])->with('success', 'Exam seating created successfully.');
     }
 }

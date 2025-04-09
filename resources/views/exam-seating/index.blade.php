@@ -37,7 +37,56 @@
         </div>
         <button type="submit" class="btn btn-primary mt-3">Add</button>
     </form>
+    <div>
+        <table id="student-table" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Student ID</th>
+                    <th>Department</th>
+                    <th>Year</th>
+                    <th>Batch</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="student-table-body">
+                <!-- Data will be populated here using JavaScript -->
+            </tbody>
+        </table>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Fetch student data using AJAX
+            fetch('{{ route('students.get') }}')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById('student-table-body');
+                    tableBody.innerHTML = ''; // Clear existing rows
 
+                    data.forEach((student, index) => {
+                        const row = `
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${student.name}</td>
+                                <td>${student.student_id}</td>
+                                <td>${student.department}</td>
+                                <td>${student.year}</td>
+                                <td>${student.batch}</td>
+                                <td>${student.email}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">Edit</button>
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                        `;
+                        tableBody.innerHTML += row;
+                    });
+                })
+                .catch(error => console.error('Error fetching student data:', error));
+        });
+    </script>
     <!-- Main Content -->
     <div class="bench-container">
         <div class="d-flex gap-2 mb-4 justify-content-end" style="height: 30px;">

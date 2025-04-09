@@ -41,15 +41,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($students as $index => $student)
+                                        @foreach ($students as $student)
                                             <tr>
-                                                <td>{{ $index + 1 }}</td>
+                                                <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $student->name }}</td>
                                                 <td>{{ $student->student_id }}</td>
                                                 <td>{{ $student->department }}</td>
                                                 <td>{{ $student->year }}</td>
                                                 <td>{{ $student->batch }}</td>
-                                                <td>{{ $student->email }}</td> <!-- Display email -->
+                                                <td>{{ $student->email }}</td>
                                                 <td>
                                                     @if (auth()->user()->hasRole('admin') || auth()->user()->can('update-students'))
                                                         <a href="{{ route('students.edit', $student->id) }}"
