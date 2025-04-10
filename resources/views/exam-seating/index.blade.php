@@ -3,6 +3,7 @@
 @section('content')
 <head>
     <link rel="stylesheet" href="{{ asset('css/exam-seating.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 </head>
 <div class="container mt-4">
     <h3>Exam Seating</h3>
@@ -47,8 +48,6 @@
                     <th>Department</th>
                     <th>Year</th>
                     <th>Batch</th>
-                    <th>Email</th>
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody id="student-table-body">
@@ -56,6 +55,8 @@
             </tbody>
         </table>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Fetch student data using AJAX
@@ -74,15 +75,13 @@
                                 <td>${student.department}</td>
                                 <td>${student.year}</td>
                                 <td>${student.batch}</td>
-                                <td>${student.email}</td>
-                                <td>
-                                    <button class="btn btn-sm btn-primary">Edit</button>
-                                    <button class="btn btn-sm btn-danger">Delete</button>
-                                </td>
                             </tr>
                         `;
                         tableBody.innerHTML += row;
                     });
+
+                    // Initialize DataTable
+                    $('#student-table').DataTable();
                 })
                 .catch(error => console.error('Error fetching student data:', error));
         });

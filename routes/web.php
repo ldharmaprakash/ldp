@@ -78,8 +78,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('{id}/download', [StudentController::class, 'download'])->name('students.download')
             ->middleware('role:admin|permission:read-students');
         Route::post('/students/import', [StudentController::class, 'import'])->name('students.import');
-        Route::get('/students', [StudentController::class, 'getStudents'])->name('students.get');
-        Route::get('/students', [StudentController::class, 'getStudents'])->name('students.get');
+        
+
+  
     });
 
     // Teacher Routes
@@ -166,6 +167,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/exam-seating', [ExamSeatingController::class, 'index'])->name('exam-seating.index');
         Route::post('/exam-seating', [ExamSeatingController::class, 'store'])->name('exam-seating.store');
+        Route::get('/exam-seating12', [ExamSeatingController::class, 'getStudents'])->name('students.get');
     });
 
 });

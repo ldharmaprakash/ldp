@@ -126,12 +126,5 @@ class StudentController extends Controller
         return redirect()->route('students.index')->with('success', 'Students imported successfully.');
     }
 
-    public function getStudents()
-    {
-        // Fetch all students from the database
-        $students = Student::all();
-
-        // Return the data as JSON
-        return response()->json($students);
-    }
+ 
 }

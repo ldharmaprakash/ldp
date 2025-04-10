@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Student;
 
 class ExamSeatingController extends Controller
 {
@@ -22,10 +23,20 @@ class ExamSeatingController extends Controller
             'regno_end' => 'required|integer',
         ]);
 
-        // Fetch all students
-        $students = \App\Models\Student::all();
-
-        // Redirect back to the index view with the student data
-        return redirect()->route('exam-seating.index', ['students' => $students])->with('success', 'Exam seating created successfully.');
+       
     }
+    public function getStudents()
+    {
+        // Fetch all students from the database
+        $students = Student::
+            select('id', 'name', 'student_id', 'department', 'year', 'batch', 'gender', 'register_number')
+            ->get();    
+        // Debugging: Log the fetched students
+        \Log::info('Fetched Students:', $students->toArray());
+
+
+        // Return the data as JSON
+        return response()->json($students);
+    }
+    
 }
