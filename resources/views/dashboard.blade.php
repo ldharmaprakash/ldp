@@ -13,7 +13,7 @@
 <body>
     <div class="">
         <!-- Contact Info -->
-        <div class="d-flex align-items-center gap-3 p-3" style="background-color:rgb(247, 231, 184);">
+        <div class="d-flex align-items-center gap-3 p-3" style="background-color:rgb(93, 230, 212);">
             <span><i class="fas fa-phone-alt"></i> Phone: +1234567890</span>
             <span><i class="fas fa-mobile-alt"></i> Cell: +0987654321</span>
             <span><i class="fas fa-envelope"></i> Email: info@college.com</span>
@@ -75,6 +75,12 @@
                         <li><a class="dropdown-item" >Electrical Engineering</a></li>
                         <li><a class="dropdown-item" >Mechanical Engineering</a></li>
                     </ul>
+                    <span for="department" style="color:white;">Department</span>
+                <select id="department" name="department" class="form-select">
+                    @foreach(\App\Models\Student::select('department')->distinct()->get() as $dept)
+                        <option value="{{ $dept->department }}">{{ $dept->department }}</option>
+                    @endforeach
+                </select>
                 </div>
             </div>
         </div>
@@ -84,7 +90,7 @@
             <div class="row">
                 <div class="col-md-2  ms-4">
                     <h5>Address</h5>
-                    <p>54, College St, <br> College Main Road,<br> Manjakuppam,<br>
+                    <p>54, College St, <br> College Main Road,<br> Kumarapuram,<br>
                     Cuddalore,  Tamilnadu.</p>
                 </div>
                 <div class="col-md-8">

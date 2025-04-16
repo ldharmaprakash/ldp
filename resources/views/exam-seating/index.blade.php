@@ -12,30 +12,41 @@
             <div class="col-md-3">
                 <label for="department" class="form-label">Department</label>
                 <select id="department" name="department" class="form-select">
-                    <option value="cs">Computer Science</option>
-                    <option value="ee">Electrical Engineering</option>
-                    <option value="me">Mechanical Engineering</option>
+                    <option value="">All</option>
+                    @foreach(\App\Models\Student::select('department')->distinct()->get() as $dept)
+                        <option value="{{ $dept->department }}">{{ $dept->department }}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="col-md-3">
                 <label for="year" class="form-label">Year</label>
                 <select id="year" name="year" class="form-select">
-                    <option value="1">1st Year</option>
-                    <option value="2">2nd Year</option>
-                    <option value="3">3rd Year</option>
-                    <option value="4">4th Year</option>
+                    <option value="">All</option>
+                    @foreach(\App\Models\Student::select('year')->distinct()->get() as $yr)
+                        <option value="{{ $yr->year }}">{{ $yr->year }}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="col-md-3">
                 <label for="regno_start" class="form-label">Reg No Start</label>
-                <input type="number" id="regno_start" name="regno_start" class="form-control" required>
+                <select id="regno_start" name="regno_start" class="form-select">
+                    <option value="">All</option>
+                    @foreach(\App\Models\Student::select('register_number')->distinct()->get() as $regno)
+                        <option value="{{ $regno->register_number }}">{{ $regno->register_number }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="col-md-3">
                 <label for="regno_end" class="form-label">Reg No End</label>
-                <input type="number" id="regno_end" name="regno_end" class="form-control" required>
+                <select id="regno_end" name="regno_end" class="form-select">
+                    <option value="">All</option>
+                    @foreach(\App\Models\Student::select('register_number')->distinct()->get() as $regno)
+                        <option value="{{ $regno->register_number }}">{{ $regno->register_number }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary mt-3">Add</button>
+        <button type="submit" class="btn btn-primary mt-3">Show</button>
     </form>
     <div>
         <table id="student-table" class="table table-striped table-bordered">
@@ -48,47 +59,107 @@
                     <th>Year</th>
                     <th>Batch</th>
                     <th>Email</th>
-                    <th>Actions</th>
+                    <th>Register Number</th>
+                    <th>Action</th>
                 </tr>
             </thead>
-            <tbody id="student-table-body">
-                <!-- Data will be populated here using JavaScript -->
+            <tbody>
+                @if(isset($students) && count($students) > 0)
+                    @foreach($students as $index => $student)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $student->name }}</td>
+                            <td>{{ $student->student_id }}</td>
+                            <td>{{ $student->department }}</td>
+                            <td>{{ $student->year }}</td>
+                            <td>{{ $student->batch }}</td>
+                            <td>{{ $student->email }}</td>
+                            <td>{{ $student->register_number }}</td>
+                            <td>
+                                <button class="btn btn-danger btn-sm remove-row">Remove</button>
+                            </td>
+                        </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td colspan="9" class="text-center">No records found</td>
+                    </tr>
+                @endif
             </tbody>
         </table>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Fetch student data using AJAX
-            fetch('{{ route('students.get') }}')
-                .then(response => response.json())
-                .then(data => {
-                    const tableBody = document.getElementById('student-table-body');
-                    tableBody.innerHTML = ''; // Clear existing rows
+        $(document).ready(function() {
+            const table = $('#student-table').DataTable({
+                paging: true,
+                searching: true,
+                ordering: true,
+                info: true,
+                lengthChange: true,
+                pageLength: 5,
+                language: {
+                    search: "Filter records:",
+                    lengthMenu: "Show _MENU_ entries",
+                    info: "Showing _START_ to _END_ of _TOTAL_ entries",
+                    paginate: {
+                        first: "First",
+                        last: "Last",
+                        next: "Next",
+                        previous: "Previous"
+                    }
+                }
+            });
 
-                    data.forEach((student, index) => {
-                        const row = `
-                            <tr>
-                                <td>${index + 1}</td>
-                                <td>${student.name}</td>
-                                <td>${student.student_id}</td>
-                                <td>${student.department}</td>
-                                <td>${student.year}</td>
-                                <td>${student.batch}</td>
-                                <td>${student.email}</td>
-                                <td>
-                                    <button class="btn btn-sm btn-primary">Edit</button>
-                                    <button class="btn btn-sm btn-danger">Delete</button>
-                                </td>
-                            </tr>
-                        `;
-                        tableBody.innerHTML += row;
-                    });
-                })
-                .catch(error => console.error('Error fetching student data:', error));
+            // Fix: Ensure event delegation is properly set up for dynamically added rows
+            $('#student-table tbody').on('click', '.remove-row', function() {
+                const row = $(this).closest('tr'); // Get the closest table row
+                table.row(row).remove().draw(); // Remove the row from DataTable and redraw
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const departmentSelect = document.getElementById('department');
+            const yearSelect = document.getElementById('year');
+            const regnoStartSelect = document.getElementById('regno_start');
+            const regnoEndSelect = document.getElementById('regno_end');
+
+            function fetchRegisterNumbers() {
+                const department = departmentSelect.value;
+                const year = yearSelect.value;
+
+                if (department && year) {
+                    fetch(`{{ url('/exam-seating/get-students') }}?department=${department}&year=${year}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            regnoStartSelect.innerHTML = '<option value="">All</option>';
+                            regnoEndSelect.innerHTML = '<option value="">All</option>';
+                            if (data.length === 0) {
+                                console.log('No register numbers found for the selected department and year.');
+                                return;
+                            }
+                            data.forEach(student => {
+                                const option = `<option value="${student.register_number}">${student.register_number}</option>`;
+                                regnoStartSelect.innerHTML += option;
+                                regnoEndSelect.innerHTML += option;
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error fetching register numbers:', error);
+                            regnoStartSelect.innerHTML = '<option value="">All</option>';
+                            regnoEndSelect.innerHTML = '<option value="">All</option>';
+                        });
+                } else {
+                    regnoStartSelect.innerHTML = '<option value="">All</option>';
+                    regnoEndSelect.innerHTML = '<option value="">All</option>';
+                }
+            }
+
+            departmentSelect.addEventListener('change', fetchRegisterNumbers);
+            yearSelect.addEventListener('change', fetchRegisterNumbers);
         });
     </script>
     <!-- Main Content -->
-    <div class="bench-container">
+    <div class="main_container">
         <div class="d-flex gap-2 mb-4 justify-content-end" style="height: 30px;">
             <div class="col-12 col-md-3  d-flex align-items-center">
                 <label for="roomno" class="form-label me-2 mb-0" style="white-space: nowrap;">Room No</label>
@@ -104,7 +175,7 @@
         </div>
         
         <div class="main-content row g-3 p-2 mt-2" style="background-color:rgb(237, 241, 245);">
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-4 col-sm-6  bench_container">
                 <div id="bench1" class="bench bench1">
                     <div class="student">
                         <h5>Student 1</h5>
@@ -120,7 +191,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-4 col-sm-6  bench_container">
                 <div id="bench2" class="bench bench2">
                     <div class="student">
                         <h5>Student 4</h5>
@@ -136,7 +207,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-4 col-sm-6 bench_container ">
                 <div id="bench3" class="bench bench3">
                     <div class="student">
                         <h5>Student 7</h5>
@@ -153,7 +224,7 @@
                 </div>
             </div>
             <!-- New Row -->
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-4 col-sm-6 bench_container">
                 <div id="bench4" class="bench bench4">
                     <div class="student">
                         <h5>Student 10</h5>
@@ -161,7 +232,7 @@
                     </div>
                     <div class="student">
                         <h5>Student 11</h5>
-                        <p>Roll No: 011</p>
+                        <p>Roll No: &nbsp; 011</p>
                     </div>
                     <div class="student">
                         <h5>Student 12</h5>
@@ -169,7 +240,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-4 col-sm-6 bench_container">
                 <div id="bench5" class="bench bench5">
                     <div class="student">
                         <h5>Student 13</h5>
@@ -185,7 +256,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-4 col-sm-6 bench_container">
                 <div id="bench6" class="bench bench6">
                     <div class="student">
                         <h5>Student 16</h5>
@@ -202,7 +273,7 @@
                 </div>
             </div>
             <!-- Additional Row -->
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-4 col-sm-6 bench_container">
                 <div id="bench7" class="bench bench7">
                     <div class="student">
                         <h5>Student 19</h5>
@@ -218,7 +289,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-4 col-sm-6 bench_container">
                 <div id="bench8" class="bench bench8">
                     <div class="student">
                         <h5>Student 22</h5>
@@ -234,7 +305,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-4 col-sm-6 bench_container">
                 <div id="bench9" class="bench bench9">
                     <div class="student">
                         <h5>Student 25</h5>
@@ -251,7 +322,7 @@
                 </div>
             </div>
             <!-- Additional Row -->
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-4 col-sm-6 bench_container">
                 <div id="bench10" class="bench bench10">
                     <div class="student">
                         <h5>Student 28</h5>
@@ -267,7 +338,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-4 col-sm-6 bench_container">
                 <div id="bench11" class="bench bench11">
                     <div class="student">
                         <h5>Student 31</h5>
@@ -283,7 +354,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-4 col-sm-6 bench_container">
                 <div id="bench12" class="bench bench12">
                     <div class="student">
                         <h5>Student 34</h5>
@@ -300,7 +371,7 @@
                 </div>
             </div>
             <!-- Additional Row -->
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-4 col-sm-6 bench_container">
                 <div id="bench13" class="bench bench13">
                     <div class="student">
                         <h5>Student 37</h5>
@@ -316,7 +387,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-4 col-sm-6 bench_container">
                 <div id="bench14" class="bench bench14">
                     <div class="student">
                         <h5>Student 40</h5>
@@ -332,7 +403,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-4 col-sm-6 bench_container">
                 <div id="bench15" class="bench bench15">
                     <div class="student">
                         <h5>Student 43</h5>
@@ -368,5 +439,6 @@
     
 </div>
 @endsection
+
 
 

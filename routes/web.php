@@ -166,6 +166,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/exam-seating', [ExamSeatingController::class, 'index'])->name('exam-seating.index');
         Route::post('/exam-seating', [ExamSeatingController::class, 'store'])->name('exam-seating.store');
+        Route::get('/exam-seating/get-students', [App\Http\Controllers\ExamSeatingController::class, 'getStudentsByDepartmentAndYear']);
     });
 
 });

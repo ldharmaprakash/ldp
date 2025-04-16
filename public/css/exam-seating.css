@@ -34,3 +34,19 @@
 .form-control{
     padding: 0.375rem 0.75rem;
 }
+@media (min-width: 768px) {
+    .student {
+        
+       padding:  3px !important;
+       margin: 0 5px !important;
+}
+.student h5{
+    font-size: 14px !important;
+}
+.bench{
+    padding: 6px;
+}
+.bench_container{
+    margin-top: 0px !important;
+}
+}

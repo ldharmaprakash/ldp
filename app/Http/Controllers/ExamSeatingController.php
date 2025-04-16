@@ -16,16 +16,67 @@ class ExamSeatingController extends Controller
     {
         // Validate the form input
         $validated = $request->validate([
-            'department' => 'required|string',
-            'year' => 'required|integer',
-            'regno_start' => 'required|integer',
-            'regno_end' => 'required|integer',
+            'department' => 'nullable|string',
+            'year' => 'nullable|integer',
+            'regno_start' => 'nullable|string',
+            'regno_end' => 'nullable|string',
         ]);
 
-        // Fetch all students
-        $students = \App\Models\Student::all();
+        // Normalize input values
+        $department = $validated['department'] ?? null;
+        $year = $validated['year'] ?? null;
+        $regno_start = $validated['regno_start'] ?? null;
+        $regno_end = $validated['regno_end'] ?? null;
 
-        // Redirect back to the index view with the student data
-        return redirect()->route('exam-seating.index', ['students' => $students])->with('success', 'Exam seating created successfully.');
+        // Build the query
+        $query = \App\Models\Student::query();
+
+        if ($department) {
+            $query->where('department', $department);
+        }
+
+        if ($year) {
+            $query->where('year', $year);
+        }
+
+        if ($regno_start && $regno_end) {
+            $query->whereBetween('register_number', [$regno_start, $regno_end]);
+        } elseif (!$regno_start && !$regno_end) {
+            $query->whereNotNull('register_number');
+        }
+
+        // Fetch all students if no filters are applied
+        $students = $query->get();
+
+        // Log the fetched students for debugging
+        \Log::info('Fetched Students:', $students->toArray());
+
+        // Return the view with the filtered student data
+        return view('exam-seating.index', compact('students'));
+    }
+
+    public function getStudentsByDepartmentAndYear(Request $request)
+    {
+        $validated = $request->validate([
+            'department' => 'required|string',
+            'year' => 'required|integer',
+        ]);
+
+        // Fetch students based on department and year
+        $students = \App\Models\Student::where('department', $validated['department'])
+            ->where('year', $validated['year'])
+            ->select('register_number')
+            ->distinct()
+            ->get();
+
+        // Return an empty array if no students are found
+        if ($students->isEmpty()) {
+            return response()->json([]);
+        }
+
+        // Log the fetched data for debugging
+        \Log::info('Fetched Register Numbers:', $students->toArray());
+
+        return response()->json($students);
     }
 }

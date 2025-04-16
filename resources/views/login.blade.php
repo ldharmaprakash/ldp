@@ -56,9 +56,13 @@
 	                            <div class="d-grid gap-2">
 	                                <button type="submit" class="btn btn-primary rounded">Sign In</button>
 	                            </div>
+								<div class="d-grid gap-2">
+									<a href="{{ route('register') }}"  class="mb-4 " style="  text-align: center; text-decoration: underline;">sign up</a>
+								</div>
 	                        </div>
 	                    </div>
                 	</form>
+				
 				</div>
 			</div>
 		</div>
