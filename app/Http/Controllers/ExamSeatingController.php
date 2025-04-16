@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Student;
 
 class ExamSeatingController extends Controller
 {
@@ -60,23 +61,24 @@ class ExamSeatingController extends Controller
         $validated = $request->validate([
             'department' => 'required|string',
             'year' => 'required|integer',
+            'regno_start' => 'required|integer',
+            'regno_end' => 'required|integer',
         ]);
 
-        // Fetch students based on department and year
-        $students = \App\Models\Student::where('department', $validated['department'])
-            ->where('year', $validated['year'])
-            ->select('register_number')
-            ->distinct()
-            ->get();
+       
+    }
+    public function getStudents()
+    {
+        // Fetch all students from the database
+        $students = Student::
+            select('id', 'name', 'student_id', 'department', 'year', 'batch', 'gender', 'register_number')
+            ->get();    
+        // Debugging: Log the fetched students
+        \Log::info('Fetched Students:', $students->toArray());
 
-        // Return an empty array if no students are found
-        if ($students->isEmpty()) {
-            return response()->json([]);
-        }
 
-        // Log the fetched data for debugging
-        \Log::info('Fetched Register Numbers:', $students->toArray());
-
+        // Return the data as JSON
         return response()->json($students);
     }
+    
 }

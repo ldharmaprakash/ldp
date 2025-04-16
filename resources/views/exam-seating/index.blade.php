@@ -3,6 +3,7 @@
 @section('content')
 <head>
     <link rel="stylesheet" href="{{ asset('css/exam-seating.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 </head>
 <div class="container mt-4">
     <h3>Exam Seating</h3>
@@ -59,8 +60,7 @@
                     <th>Year</th>
                     <th>Batch</th>
                     <th>Email</th>
-                    <th>Register Number</th>
-                    <th>Action</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -88,6 +88,8 @@
             </tbody>
         </table>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
             const table = $('#student-table').DataTable({
@@ -118,44 +120,33 @@
         });
 
         document.addEventListener('DOMContentLoaded', function () {
-            const departmentSelect = document.getElementById('department');
-            const yearSelect = document.getElementById('year');
-            const regnoStartSelect = document.getElementById('regno_start');
-            const regnoEndSelect = document.getElementById('regno_end');
+            // Fetch student data using AJAX
+            fetch('{{ route('students.get') }}')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById('student-table-body');
+                    tableBody.innerHTML = ''; // Clear existing rows
 
-            function fetchRegisterNumbers() {
-                const department = departmentSelect.value;
-                const year = yearSelect.value;
-
-                if (department && year) {
-                    fetch(`{{ url('/exam-seating/get-students') }}?department=${department}&year=${year}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            regnoStartSelect.innerHTML = '<option value="">All</option>';
-                            regnoEndSelect.innerHTML = '<option value="">All</option>';
-                            if (data.length === 0) {
-                                console.log('No register numbers found for the selected department and year.');
-                                return;
-                            }
-                            data.forEach(student => {
-                                const option = `<option value="${student.register_number}">${student.register_number}</option>`;
-                                regnoStartSelect.innerHTML += option;
-                                regnoEndSelect.innerHTML += option;
-                            });
-                        })
-                        .catch(error => {
-                            console.error('Error fetching register numbers:', error);
-                            regnoStartSelect.innerHTML = '<option value="">All</option>';
-                            regnoEndSelect.innerHTML = '<option value="">All</option>';
-                        });
-                } else {
-                    regnoStartSelect.innerHTML = '<option value="">All</option>';
-                    regnoEndSelect.innerHTML = '<option value="">All</option>';
-                }
-            }
-
-            departmentSelect.addEventListener('change', fetchRegisterNumbers);
-            yearSelect.addEventListener('change', fetchRegisterNumbers);
+                    data.forEach((student, index) => {
+                        const row = `
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${student.name}</td>
+                                <td>${student.student_id}</td>
+                                <td>${student.department}</td>
+                                <td>${student.year}</td>
+                                <td>${student.batch}</td>
+                                <td>${student.email}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">Edit</button>
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                        `;
+                        tableBody.innerHTML += row;
+                    });
+                })
+                .catch(error => console.error('Error fetching student data:', error));
         });
     </script>
     <!-- Main Content -->
